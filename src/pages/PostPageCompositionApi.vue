@@ -16,7 +16,7 @@
         <!--Preloader-->
         <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
     </div>
-    <!--(000)ref we use to get access to DOM element-->
+    <div v-intersection="fetchingMore" class="observer"></div>
 
 </template>
 
@@ -45,7 +45,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
     },
 
     setup(props) {
-        const { posts, totalPage, isPostLoading } = usePosts(5);// 5- it is 'limit'
+        const { posts, totalPage, isPostLoading, fetchingMore } = usePosts(5);// 5- it is 'limit'
         const { selectedSort, sortedPosts } = useSortedPost(posts)
         const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPost(sortedPosts)
         const { dialogVisible, showDialogVisible } = useDialogVisible()
@@ -62,6 +62,7 @@ export default {// data and methods stay here couse they'll be used in diferent 
             dialogVisible,
             showDialogVisible,
             createPost,
+            fetchingMore
         }
     },
     methods: {

@@ -1,20 +1,36 @@
 <template>
     <div>
         <h1>Post page</h1>
-        <my-input v-focus :model-value="searchQuery" @update:model-value="setSearchQuery" placeholder="Seach..." />
+        <my-input 
+        v-focus 
+          :model-value="searchQuery" 
+          @update:model-value="setSearchQuery" 
+          placeholder="Seach..." />
         <div class="app__bnts">
-            <my-button style="margin: 15px 0" @click="showDialog">Create post</my-button>
-            <my-select :model-value="selectedSort" @update:model-value="setSelectedSort" :options="sortOptions">
+            <my-button 
+               style="margin: 15px 0" 
+               @click="showDialog">
+               Create post
+            </my-button>
+            <my-select 
+               :model-value="selectedSort"
+               @update:model-value="setSelectedSort" 
+               :options="sortOptions">
             </my-select>
         </div>
         <!-- v-model connect show in MyDialog with dialogVisible in this page -->
-        <my-dialog v-model:show="dialogVisible">
+        <my-dialog v-model:show="dialogVisible" >
             <!-- This use slot -->
             <post-form @create="createPost" />
         </my-dialog>
-        <post-list :posts="sortedAndSearchedPost" @remove='removePost' v-if="!isPostLoading" />
+        <post-list 
+            :posts="sortedAndSearchedPost" 
+            @remove='removePost' 
+            v-if="!isPostLoading" />
         <!--Preloader-->
-        <my-preloader class="loader" v-show="isPostLoading">loading</my-preloader>
+        <my-preloader 
+            class="loader" 
+            v-show="isPostLoading"> loading</my-preloader>
     </div>
     <div v-intersection="loadMorePosts" class="observer"></div>
     <!--(000)ref we use to get access to DOM element-->
