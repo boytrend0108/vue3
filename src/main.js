@@ -7,8 +7,7 @@ const app = createApp(App);
 import components from '@/components/UI'
 components.forEach(component => {
     app.component(component.name, component)// Global registration UI 
-}
-)
+})
 //---Global registration directives
 import directives from '@/directives';
 directives.forEach(directive => {
